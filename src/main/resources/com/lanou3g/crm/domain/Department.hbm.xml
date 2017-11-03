@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        <hibernate-mapping package="com.lanou3g.crm.domain">
+    <class name="Department" table="T_DEPT">
+        <id name="id" column="DEPT_ID">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="name"/>
+        <!--部门与职位的一对多-->
+        <set name="posts" table="T_POST" cascade="save-update"
+        inverse="true">
+            <!--值在POST表里新生成的列-->
+            <key column="DEPT_ID"></key>
+            <one-to-many class="Post"/>
+        </set>
+
+        <!--部门与员工的一对多-->
+        <set name="staffs" table="T_STAFF" cascade="save-update"
+        inverse="true">
+            <key column="DEPT_ID"></key>
+            <one-to-many class="Staff"/>
+
+        </set>
+    </class>
+
+
+</hibernate-mapping>
